@@ -1,13 +1,13 @@
 openapi: 3.0.0
 info:
-  title: Kithugs
-  description: API description for KITHUGS.
+  title: VDX Example client
+  description: API description for example client..
   version: "1.0.0"
   contact:
     email: development@kvalitetitsit.dk
 tags:
-  - name: KITHUGS
-    description: KITHUGS related API's
+  - name: VDXExample
+    description: VDX Example API
 
 servers:
   - url: '{protocol}://{environment}:{port}'
@@ -26,57 +26,68 @@ servers:
           - 8080
         default: 8080
 paths:
-  /v1/hello:
-    post:
+  /v1/{uuid}:
+    get:
       tags:
-        - KITHUGS
-      summary: Call the thugs service
-      description: Post your name and get some hugs or meet some thugs.
-      requestBody:
-        description: Your name
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/helloRequest'
+        - VDXExample
+      summary: Call the service that call VideoAPI
+      description: Call the service that call VideoAPI.
+      parameters:
+        - $ref: '#/components/parameters/uuid'
       responses:
         '200':
           description: Ok
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/helloResponse'
+                $ref: '#/components/schemas/exampleResponse'
 
 components:
-  responses:
-    '400':
-      description: "Bad Request. This could be because: * One of the required parameters/properties are missing or is empty <br> * Length of input is exceeding maximum length <br> (See a possible detailed error message in the in the response.)"
-    '401':
-      description: "Unauthorized. This could be because: <br> * The calling system has not been properly authenticated."
-    '403':
-      description: "Forbidden. This could be because: <br> * The requested information does not belong the organisation of the user <br> * The calling user does not have the required roles"
+  parameters:
+    uuid:
+      name: uuid
+      in: path
+      description: the uuid for the requested information
+      required: true
+      schema:
+        type: string
+        format: uuid
+      example: 46b46a1e-a4d3-4387-87ee-a67dcaa222cb
   schemas:
-    helloResponse:
+    exampleResponse:
       type: object
       required:
-        - name
-        - now
+        - subject
+        - uuid
+        - startTime
+        - endTime
+        - shortId
       properties:
-        name:
-          description: Your name
+        subject:
           type: string
-          example: "John Doe"
-        now:
-          description: Time request was receved
+          maxLength: 100
+          example: Short talk about hiring new people
+        uuid:
+          type: string
+          format: uuid
+          example: 46b46a1e-a4d3-4387-87ee-a67dcaa222cb
+        startTime:
           type: string
           format: date-time
-
-    helloRequest:
-      type: object
-      required:
-        - name
-      properties:
-        name:
-          description: Your name
+          example: 2018-11-01T10:00:00+0000
+        endTime:
           type: string
-          example: "John Doe"
+          format: date-time
+          example: 2018-11-01T10:30:00+0000
+        description:
+          type: string
+          maxLength: 500
+          example: We need to agree on the process should be. And what deadlines we have during the next 14 days.
+        shortId:
+          type: string
+          minLength: 12
+          maxLength: 12
+          example: abcdefghijkl
+        shortLink:
+          type: string
+          example: https://m.vconf.dk/abcdefghijkl

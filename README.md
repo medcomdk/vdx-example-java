@@ -1,30 +1,21 @@
-![Build Status](https://github.com/KvalitetsIT/kithugs/workflows/CICD/badge.svg) ![Test Coverage](.github/badges/jacoco.svg)
-# kithugs
+![Build Status](https://github.com/KvalitetsIT/vdx-example-java/workflows/CICD/badge.svg) ![Test Coverage](.github/badges/jacoco.svg)
+# vdx-example-java
 
-Template repository showing how to be a good Java Spring Boot citizen in a k8s cluster.
+Simple example on how to call VideoAPI in Java without using WSC proxy. It is a simple Spring Boot application with a 
+single endpoint at v1/{uuid} where uuid is a meeting uuid in your organisation.
 
 ## Getting started
 
-Run `./setup.sh GIT_REPOSITORY_NAME`.
+This is a working example, and you only need to create a JKS Keystore with a private key entry and a trusted certificate
+entry. The private key entry is the key used to sign requests to the STS. It must be configured in the STS. The trusted
+certificate entry must be the signing certificate from the STS. This certificate can be found at 
+[https://docs.vconf-stage.dk/sts/cert/sts.cer](https://docs.vconf-stage.dk/sts/cert/sts.cer).
 
-Above does a search/replace in relevant files. 
+### Run example in docker
 
-## Endpoints
+Run below command and open [http://localhost](http://localhost) in a browser and you can call the service using
+Swagger UI. 
 
-The service is listening for connections on port 8080.
+### Run it in your IDE
 
-Spring boot actuator is listening for connections on port 8081. This is used as prometheus scrape endpoint. 
-
-Prometheus scrape endpoint: `http://localhost:8081/actuator/prometheus`  
-Health URL that can be used for readiness probe: `http://localhost:8081/actuator/health`
-
-## Configuration
-
-| Environment variable | Description | Required |
-|----------------------|-------------|---------- |
-| JDBC_URL | JDBC connection URL | Yes |
-| JDBC_USER | JDBC user          | Yes |
-| JDBC_PASS | JDBC password      | Yes |
-| LOG_LEVEL | Log Level for applikation  log. Defaults to INFO. | No |
-| LOG_LEVEL_FRAMEWORK | Log level for framework. Defaults to INFO. | No |
-| CORRELATION_ID | HTTP header to take correlation id from. Used to correlate log messages. Defaults to "x-request-id". | No
+A test application can be found in the class TestApplication.  
