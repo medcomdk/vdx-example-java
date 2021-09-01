@@ -1,4 +1,4 @@
-![Build Status](https://github.com/KvalitetsIT/vdx-example-java/workflows/CICD/badge.svg) ![Test Coverage](.github/badges/jacoco.svg)
+![Build Status](https://github.com/medcomdk/vdx-example-java/workflows/CICD/badge.svg) ![Test Coverage](.github/badges/jacoco.svg)
 # vdx-example-java
 
 Simple example on how to call VideoAPI in Java without using WSC proxy. It is a simple Spring Boot application with a 
