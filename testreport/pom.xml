@@ -19,11 +19,6 @@
 
         <dependency>
             <groupId>dk.kvalitetsit.vdx-example-java</groupId>
-            <artifactId>integrationtest</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>dk.kvalitetsit.vdx-example-java</groupId>
             <artifactId>web</artifactId>
         </dependency>
     </dependencies>
